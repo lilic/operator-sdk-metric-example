@@ -21,7 +21,6 @@ import (
 
 	"github.com/operator-framework/operator-sdk/pkg/k8sutil"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/sirupsen/logrus"
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,7 +34,6 @@ func ExposeMetricsPort() *v1.Service {
 
 	service, err := k8sutil.InitOperatorService()
 	if err != nil {
-		logrus.Errorf("failed to initialize service object for operator metrics: %v", err)
 		return nil
 	}
 	kubeconfig, err := config.GetConfig()
@@ -48,9 +46,7 @@ func ExposeMetricsPort() *v1.Service {
 	}
 	err = runtimeClient.Create(context.TODO(), service)
 	if err != nil && !errors.IsAlreadyExists(err) {
-		logrus.Errorf("failed to create service for operator metrics: %v", err)
 		return nil
 	}
-	logrus.Infof("Metrics service %s created", service.Name)
 	return service
 }

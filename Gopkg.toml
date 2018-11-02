@@ -40,10 +40,12 @@ required = [
   version = "v0.1.4"
 
 [[constraint]]
+  source = "github.com/lilic/operator-sdk"
   name = "github.com/operator-framework/operator-sdk"
+  revision = "c0f82d7c6f8d67d1825f5f232937c68493ae66ce"
   # The version rule is used for a specific release and the master branch for in between releases.
-  branch = "master" #osdk_branch_annotation
-  # version = "=v0.1.0" #osdk_version_annotation
+  # branch = "lili/crd-metrics" #osdk_branch_annotation
+  #version = "=v0.1.0" #osdk_version_annotation
 
 [prune]
   go-tests = true
